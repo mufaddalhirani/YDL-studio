@@ -1,0 +1,26 @@
+name: Feature request
+description: An idea for the app
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        YDL Studio is a front end for yt-dlp, not a media library. Anything yt-dlp can
+        already do through a flag belongs in **Settings → Advanced** rather than a new
+        button — requests along those lines are usually closed with a link to that field.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is awkward today?
+      description: The task you were trying to do, not the widget you want added.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: How would you like it to work?
+  - type: textarea
+    id: alternative
+    attributes:
+      label: What else did you try?
+      description: Existing settings, the Advanced field, a different quality or container.

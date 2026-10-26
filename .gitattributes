@@ -1,0 +1,15 @@
+# Normalise text files in the index so a clone looks the same on every machine.
+* text=auto eol=lf
+
+# Windows batch and script files need CRLF: cmd.exe misbehaves on LF-only files,
+# notably around labels and goto.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.vbs text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary assets
+*.png binary
+*.ico binary
+*.mp4 binary
+*.exe binary

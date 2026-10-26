@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: yt-dlp site support issues
+    url: https://github.com/yt-dlp/yt-dlp/issues/new/choose
+    about: A specific site or video that stopped working is an upstream yt-dlp problem, not an app problem.
+  - name: Security report
+    url: https://github.com/mufaddalhirani/YDL-studio/security/advisories/new
+    about: Please report vulnerabilities privately instead of opening an issue.

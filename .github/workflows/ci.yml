@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Test on Python ${{ matrix.python-version }}
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Lint
+        run: ruff check ydl_studio scripts tests
+
+      - name: Tests
+        run: pytest
+
+  build:
+    name: Build Windows executable
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Build
+        run: pyinstaller scripts/YDL-Studio.spec --noconfirm
+
+      - name: Check the executable
+        run: |
+          $exe = "dist\YDL-Studio.exe"
+          if (-not (Test-Path $exe)) { throw "PyInstaller produced no executable." }
+          if ((Get-Item $exe).Length -lt 5MB) { throw "Executable looks suspiciously small." }
+          $header = [System.IO.File]::ReadAllBytes($exe)[0..1]
+          if ([System.Text.Encoding]::ASCII.GetString($header) -ne "MZ") { throw "Not a Windows PE file." }
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: YDL-Studio-windows
+          path: dist/YDL-Studio.exe
+          if-no-files-found: error

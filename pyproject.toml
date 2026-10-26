@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ydl-studio"
+version = "2.0.0"
+description = "A clean, versatile desktop GUI for yt-dlp and FFmpeg."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Mufaddal Hirani" }]
+keywords = ["yt-dlp", "youtube", "download", "ffmpeg", "gui", "customtkinter"]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Environment :: Win32 (MS Windows)",
+  "Intended Audience :: End Users/Desktop",
+  "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+  "Topic :: Multimedia :: Video",
+]
+dependencies = [
+  "customtkinter>=5.2.2,<7",
+  "Pillow>=10.0,<13",
+  "yt-dlp>=2025.1.1",
+  "pystray>=0.19.5,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<10",
+  "ruff>=0.6",
+  "pyinstaller>=6.6",
+]
+
+[project.gui-scripts]
+ydl-studio = "ydl_studio.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/mufaddalhirani/YDL-studio"
+Repository = "https://github.com/mufaddalhirani/YDL-studio"
+Issues = "https://github.com/mufaddalhirani/YDL-studio/issues"
+Changelog = "https://github.com/mufaddalhirani/YDL-studio/blob/main/CHANGELOG.md"
+Downloads = "https://github.com/mufaddalhirani/YDL-studio/releases"
+
+[tool.setuptools.packages.find]
+include = ["ydl_studio*"]
+
+[tool.setuptools.package-data]
+ydl_studio = ["assets/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

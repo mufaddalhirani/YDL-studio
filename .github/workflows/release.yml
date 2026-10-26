@@ -1,0 +1,46 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and publish
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Check the tag matches the package version
+        run: |
+          $tag = "${{ github.ref_name }}".TrimStart('v')
+          $current = python -c "import ydl_studio; print(ydl_studio.__version__)"
+          if ($tag -ne $current) { throw "Tag v$tag does not match version $current." }
+
+      - name: Install dependencies
+        run: pip install -r requirements-dev.txt
+
+      - name: Tests
+        run: pytest
+
+      - name: Build
+        run: pyinstaller scripts/YDL-Studio.spec --noconfirm
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $tag = "${{ github.ref_name }}"
+          $exe = "dist\YDL-Studio.exe"
+          $hash = (Get-FileHash -Algorithm SHA256 $exe).Hash.ToLower()
+          Set-Content -Path YDL-Studio.exe.sha256.txt -Value "$($hash)  YDL-Studio.exe"
+          gh release create $tag $exe YDL-Studio.exe.sha256.txt --title "YDL Studio $tag" --generate-notes
