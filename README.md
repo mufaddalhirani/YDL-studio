@@ -19,6 +19,10 @@
     A desktop app for yt-dlp with a queue, batch downloads, playlists, subtitles,
     SponsorBlock, history and a system tray — without touching a terminal.
   </p>
+
+  <p>
+    <sub>64-bit Windows 10 or 11 · no installer, no Python, no admin rights needed</sub>
+  </p>
 </div>
 
 ---
