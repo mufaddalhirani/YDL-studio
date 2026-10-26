@@ -64,4 +64,7 @@ select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# Tests import ydl_studio directly, so the repository root has to be on the path.
+# Without this a bare clone needs "pip install -e ." before pytest will collect.
+pythonpath = ["."]
 addopts = "-q"
