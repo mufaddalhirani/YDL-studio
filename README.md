@@ -4,6 +4,10 @@
   </a>
 
   <p>
+    <a href="https://github.com/mufaddalhirani/YDL-studio/releases/latest/download/YDL-Studio.exe"><img src="https://img.shields.io/badge/Download_for_Windows-2563eb?style=for-the-badge&logo=windows&logoColor=white" alt="Download YDL Studio for Windows" /></a>
+  </p>
+
+  <p>
     <a href="https://github.com/mufaddalhirani/YDL-studio/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-2563eb?style=flat-square" alt="MIT License" /></a>
     <a href="https://github.com/mufaddalhirani/YDL-studio/releases/latest"><img src="https://img.shields.io/github/v/release/mufaddalhirani/YDL-studio?style=flat-square&label=release&color=16a34a" alt="Latest release" /></a>
     <a href="https://github.com/mufaddalhirani/YDL-studio/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/mufaddalhirani/YDL-studio/ci.yml?style=flat-square&label=tests" alt="Build status" /></a>
@@ -25,6 +29,21 @@ paste a link, choose a quality, press **Add to queue**, and get on with your day
 
 Everything is local. There is no account, no telemetry, and no service between you and
 the site you are downloading from.
+
+## Start in three steps
+
+1. **Download** [YDL-Studio.exe](https://github.com/mufaddalhirani/YDL-studio/releases/latest/download/YDL-Studio.exe)
+   and put it anywhere — desktop, folder, USB stick. Nothing is installed and no Python
+   is needed. If Windows SmartScreen warns, choose **More info → Run anyway**; the build
+   is unsigned because it is not sold.
+2. **Paste a link** into the box on the Downloads page and press `Enter`. Files land in
+   `Downloads\YDL Studio`.
+3. **Add FFmpeg when asked** — plain video works without it, but audio extraction,
+   merging high-quality streams, subtitles and SponsorBlock need it, and
+   **Settings → FFmpeg → Install FFmpeg** fetches the official build in one click.
+
+Everything else — batch links, playlists, quality, subtitles, history — is on the pages
+below.
 
 ## See it
 
@@ -71,17 +90,12 @@ Blender's open movies.
 
 ## Install
 
-### The easy way — portable executable
+### Portable executable
 
-1. Download `YDL-Studio.exe` from the
-   [latest release](https://github.com/mufaddalhirani/YDL-studio/releases/latest).
-2. Put it anywhere you like — a folder, a USB stick, the desktop.
-3. Double-click it.
-
-Nothing is installed, no Python required. Windows SmartScreen may warn on first launch
-because the build is unsigned; choose **More info → Run anyway**.
-
-Every release attaches `YDL-Studio.exe.sha256.txt`. To check your copy:
+Covered by *Start in three steps* above: one file from the
+[latest release](https://github.com/mufaddalhirani/YDL-studio/releases/latest), no
+installer and no Python. Every release also attaches `YDL-Studio.exe.sha256.txt`, so you
+can confirm the download is intact:
 
 ```powershell
 Get-FileHash .\YDL-Studio.exe -Algorithm SHA256
